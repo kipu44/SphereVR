@@ -3,6 +3,8 @@
 *.lo
 *.o
 *.obj
+*.pdb
+*.exp
 
 # Precompiled Headers
 *.gch
@@ -21,6 +23,8 @@
 *.la
 *.a
 *.lib
+!wiimote.x32.lib
+!wiimote.x64.lib
 
 # Executables
 *.exe
