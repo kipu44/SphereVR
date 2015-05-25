@@ -3,27 +3,17 @@
 #include "SphereVR.h"
 #include "BalanceBoardController.h"
 
-//ABalanceBoardController::ABalanceBoardController(const FObjectInitializer& ObjectInitializer)
-//	: Super(ObjectInitializer)
-//{
-//#ifdef WITH_BALANCE_BOARD_BINDING
-//	UE_LOG(LogTemp, Warning, TEXT("WITH_BALANCE_BOARD_BINDING"));
-//
-//	remote.CallbackTriggerFlags = (state_change_flags)(CONNECTED |
-//		EXTENSION_CHANGED |
-//		MOTIONPLUS_CHANGED);
-//#endif
-//}
-
+void ABalanceBoardController::BeginPlay()
+{
+	UE_LOG(LogTemp, Warning, TEXT("WITH_BALANCE_BOARD_BINDING"));
+	
+	remote.CallbackTriggerFlags = (state_change_flags)(CONNECTED |
+		EXTENSION_CHANGED |
+		MOTIONPLUS_CHANGED);
+}
 
 void ABalanceBoardController::Tick(float DeltaSeconds)
 {
-	//TEST
-	//this->TopLeftWeightEvent(20.0f);
-	//this->TopRightWeightEvent(30.0f);
-	//this->BottomLeftWeightEvent(40.0f);
-	//this->BottomRightWeightEvent(50.0f);
-	//this->TotalWeightEvent(60.0f);
 
 	UE_LOG(LogTemp, Warning, TEXT("Tick_Balance_Board"));
 
@@ -34,6 +24,8 @@ void ABalanceBoardController::Tick(float DeltaSeconds)
 			connected = false;
 			return;
 		}
+
+		if (remote.RefreshState() == NO_CHANGE) return;
 
 		if (remote.IsBalanceBoard())
 		{
@@ -52,7 +44,7 @@ void ABalanceBoardController::Tick(float DeltaSeconds)
 		{
 
 			count++;
-			//UE_LOG(LogTemp, Warning, TEXT("EACH_TICK_LOG Current count is %d"), count);
+			UE_LOG(LogTemp, Warning, TEXT("EACH_TICK_LOG Current count is %d"), count);
 			if (count > 60) return;
 		}
 

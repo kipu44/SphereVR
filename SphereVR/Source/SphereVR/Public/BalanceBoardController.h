@@ -36,6 +36,8 @@ public:
 
 	/** the desired intensity for the light */
 
+	virtual void BeginPlay();
+
 	virtual void Tick(float DeltaSeconds) override;
 
 //#endif
